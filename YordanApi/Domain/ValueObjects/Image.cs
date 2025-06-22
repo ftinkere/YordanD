@@ -1,3 +1,3 @@
-namespace YordanD.Domain.ValueObjects;
+namespace YordanApi.Domain.ValueObjects;
 
 public record Image(string Path);

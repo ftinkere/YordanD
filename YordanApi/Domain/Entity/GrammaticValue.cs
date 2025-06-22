@@ -1,6 +1,6 @@
-using YordanD.Domain.ValueObjects;
+using YordanApi.Domain.ValueObjects;
 
-namespace YordanD.Domain.Entity;
+namespace YordanApi.Domain.Entity;
 
 public class GrammaticValue(GrammaticCategory grammaticCategory, Transcriptable name) {
     public Transcriptable Name { get; set; } = name;

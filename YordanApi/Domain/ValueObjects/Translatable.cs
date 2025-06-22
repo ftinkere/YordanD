@@ -1,13 +1,13 @@
 namespace YordanApi.Domain.ValueObjects;
 
-public record Transcriptable {
+public record Translatable {
     public string Content { get; init; }
-    public string Transcription { get; init; }
-    public string? Adaptation { get; init; }
+    public string? Translation { get; init; }
+    public string? Transcription { get; init; }
     
-    public Transcriptable(string? content = null, string? transcription = null, string? adaptation = null) {
+    public Translatable(string content, string? translation = null, string? transcription = null) {
         Content = content;
+        Translation = translation;
         Transcription = transcription;
-        Adaptation = adaptation;
     }
 };

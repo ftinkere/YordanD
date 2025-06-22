@@ -1,7 +1,6 @@
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using YordanD.Domain.ValueObjects;
+using YordanApi.Domain.ValueObjects;
 
-namespace YordanD.Domain.Entity;
+namespace YordanApi.Domain.Entity;
 
 public class LexemeGroup {
     public Guid Id { get; set; } = Guid.CreateVersion7();

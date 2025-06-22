@@ -1,4 +1,4 @@
-namespace YordanD.Domain.Entity;
+namespace YordanApi.Domain.Entity;
 
 public class GramList {
     public required PartOfSpeech PartOfSpeech { get; set; }

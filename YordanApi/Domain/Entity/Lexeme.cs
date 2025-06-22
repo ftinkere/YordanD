@@ -1,6 +1,6 @@
-using YordanD.Domain.ValueObjects;
+using YordanApi.Domain.ValueObjects;
 
-namespace YordanD.Domain.Entity;
+namespace YordanApi.Domain.Entity;
 
 public class Lexeme(RichText shortDescription) {
     public Guid Id { get; set; } = Guid.CreateVersion7();

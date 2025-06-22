@@ -1,4 +1,4 @@
-namespace YordanD.Domain.ValueObjects;
+namespace YordanApi.Domain.ValueObjects;
 
 public record Tag(string Name) {
     public Color Color {

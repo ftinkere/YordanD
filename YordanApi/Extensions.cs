@@ -1,4 +1,4 @@
-namespace YordanD;
+namespace YordanApi;
 
 public static class Extensions {
     public static IEnumerable<T> InsertAfter<T>(this IEnumerable<T> source, int index, T item)

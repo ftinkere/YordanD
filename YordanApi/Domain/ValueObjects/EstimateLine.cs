@@ -1,4 +1,4 @@
-namespace YordanD.Domain.ValueObjects;
+namespace YordanApi.Domain.ValueObjects;
 
 public record EstimateLine {
     private Guid Id { get; } = Guid.CreateVersion7();

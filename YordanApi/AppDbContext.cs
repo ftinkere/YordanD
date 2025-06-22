@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using YordanApi.Dbos;
 using YordanApi.Models;
 
 namespace YordanApi;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options) {
-    public DbSet<ApplicationUser> Users { get; set; }
+public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>(options) {
 }

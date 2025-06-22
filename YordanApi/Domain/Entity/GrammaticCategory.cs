@@ -1,6 +1,6 @@
-using YordanD.Domain.ValueObjects;
+using YordanApi.Domain.ValueObjects;
 
-namespace YordanD.Domain.Entity;
+namespace YordanApi.Domain.Entity;
 
 public class GrammaticCategory(Transcriptable name) {
     public Guid Id { get; set; } = Guid.CreateVersion7();
