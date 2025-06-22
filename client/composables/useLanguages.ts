@@ -1,7 +1,7 @@
 export interface Language {
     id: string,
     authorId: string,
-    editorsId: string[],
+    editorsIds: string[],
     name: string,
     autoName: string,
     autoNameTranscription: string,
