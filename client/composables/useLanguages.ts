@@ -15,18 +15,19 @@ export const useLanguages = () => {
         credentials: 'include',
     })
 
-    function createLanguage(language: { name: string, autoName?: string, autoNameTranscription?: string, isPublished: boolean }) {
-        const res = useFetch('/api/v1/languages', {
+    async function createLanguage(language: { name: string, autoName?: string, autoNameTranscription?: string, isPublished: boolean }) {
+        const { error } = await useFetch('/api/v1/languages', {
             method: 'POST',
             body: JSON.stringify(language),
             watch: false,
             headers: { 'Content-Type': 'application/json'  },
             credentials: 'include',
         })
-        if (!res.error.value) {
-            setTimeout(refresh, 1000)
+        if (!error.value) {
+            await refresh()
+            return true
         }
-        return res
+        return false
     }
 
     return { data, error, pending, createLanguage, refreshLanguages: refresh }

@@ -37,9 +37,10 @@ export const useAuth = () => {
             isAuthenticated.value
         ) return user.value
 
-        const { data, error } = await useFetch<{ user: User, expiresAt: string, avatar?: string }>('/api/v1/me', {
+    const { data, error } = await useFetch<{ user: User, expiresAt: string, avatar?: string }>('/api/v1/me', {
             watch: false,
-            headers: useRequestHeaders(['cookie'])
+            headers: useRequestHeaders(['cookie']),
+            credentials: 'include',
         })
 
         if (error.value || !data.value || isExpired(data.value?.expiresAt)) {
@@ -55,17 +56,54 @@ export const useAuth = () => {
         return user.value
     }
 
+    const login = async (username: string, password: string) => {
+        const { error } = await useFetch('/api/v1/login', {
+            method: 'POST',
+            body: JSON.stringify({ userName: username, password }),
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            watch: false,
+        })
+
+        if (!error.value) {
+            await fetchUser(true)
+            return true
+        }
+        return false
+    }
+
+    const register = async (data: { userName: string, displayName: string, email: string, password: string }) => {
+        const { error } = await useFetch('/api/v1/register', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            watch: false,
+        })
+
+        if (!error.value) {
+            await fetchUser(true)
+            return true
+        }
+        return false
+    }
+
     // Сброс пользователя
     const logout = async () => {
         const { error } = await useFetch('/api/v1/logout', {
             method: 'POST',
             watch: false,
-            headers: useRequestHeaders(['cookie'])
+            headers: useRequestHeaders(['cookie']),
+            credentials: 'include',
         })
         if (!error.value) {
             user.value = null
             expiresAt.value = null
             isAuthenticated.value = false
+            if (autoLogoutTimeout) {
+                clearTimeout(autoLogoutTimeout)
+                autoLogoutTimeout = null
+            }
         }
     }
 
@@ -98,6 +136,8 @@ export const useAuth = () => {
         user,
         isAuthenticated,
         fetchUser,
+        login,
+        register,
         logout,
     }
 }
