@@ -76,7 +76,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         <UInput v-model="state.password" type="password" class="w-full" />
       </UFormField>
 
-      <UFormField label="Подтверждение пароля" name="passwordConfirm">
+      <UFormField label="Подтверждение пароля" name="confirmPassword">
         <UInput v-model="state.confirmPassword" type="password" class="w-full" />
       </UFormField>
 
