@@ -2,6 +2,8 @@
 import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 
+const { login } = useAuth()
+
 const schema = z.object({
     userName: z.string({ message: '' }),
     password: z.string({ message: '' }).min(8, 'Минимум 8 символов'),
@@ -16,32 +18,15 @@ const state = reactive<Partial<Schema>>({
 
 const formError = ref<string|null>(null)
 
-async function login(username: string, password: string): Promise<boolean> {
-    const { error } = await useFetch('/api/v1/login', {
-        method: 'POST',
-        body: JSON.stringify({ username, password }),
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        watch: false,
-    })
-    if (error.value) {
-        formError.value = "Неправильный логин или пароль"
-        setTimeout(() => {
-            formError.value = null
-        }, 5000)
-        return false
-    }
-    formError.value = null;
-
-    const { fetchUser } = useAuth()
-    await fetchUser()
-
-    return true
-}
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
     if (await login(event.data.userName, event.data.password)) {
         await useRouter().push('/')
+    } else {
+        formError.value = 'Неправильный логин или пароль'
+        setTimeout(() => {
+            formError.value = null
+        }, 5000)
     }
 }
 
