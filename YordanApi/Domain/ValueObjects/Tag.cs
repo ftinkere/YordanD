@@ -4,7 +4,8 @@ public record Tag(string Name) {
     public Color Color {
         get {
             var hash = Name.GetHashCode();
-            return (Color)(hash % (int)Color.Zinc); // Adjust the modulo value as needed
+            var colorsCount = Enum.GetValues<Color>().Length;
+            return (Color)(Math.Abs(hash) % colorsCount);
         }
     }
 };
